@@ -1,0 +1,12 @@
+
+
+
+Problem: 1
+================
+Process: com.sa.kotlin, PID: 31348
+    kotlin.jvm.KotlinReflectionNotSupportedError: Kotlin reflection implementation is not found at runtime. Make sure you have kotlin-reflect.jar in the classpath
+        at kotlin.jvm.internal.ClassReference.error(ClassReference.kt:79)
+        at kotlin.jvm.internal.ClassReference.getSimpleName(ClassReference.kt:12)
+
+solution
+implementation"org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
