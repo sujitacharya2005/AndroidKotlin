@@ -8,8 +8,12 @@ import com.sa.kotlin.model.NoteRepository
 
 
 class NoteViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: NoteRepository
-    private val allNotes: LiveData<List<Note>>
+    private val repository: NoteRepository = NoteRepository(application)
+    internal val allNotes: LiveData<List<Note>>
+    init {
+        allNotes = repository.allNotes
+    }
+
     fun insert(note: Note?) {
         repository.insert(note)
     }
@@ -24,14 +28,5 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteAllNotes() {
         repository.deleteAllNotes()
-    }
-
-    fun getAllNotes(): LiveData<List<Note>> {
-        return allNotes
-    }
-
-    init {
-        repository = NoteRepository(application)
-        allNotes = repository.allNotes
     }
 }
