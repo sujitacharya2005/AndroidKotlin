@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         noteViewModel.allNotes
             .observe(this,
                 Observer<List<Note>> { notes ->
-                    noteAdapter.setNotes(notes)
+                    noteAdapter.submitList(notes)
                 })
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             0,

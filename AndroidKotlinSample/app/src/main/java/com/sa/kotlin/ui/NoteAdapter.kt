@@ -3,24 +3,31 @@ package com.sa.kotlin.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sa.kotlin.R
 import com.sa.kotlin.model.Note
 import kotlinx.android.synthetic.main.note_item.view.*
 
 
-class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
-    private var listener: OnItemClickListener? = null
+class NoteAdapter : ListAdapter<Note,NoteAdapter.NoteViewHolder>(ListItemCallback()) {
 
-    internal var notes: List<Note> = ArrayList()
-    fun setNotes(notes1: List<Note>){
-            notes = notes1
-            notifyDataSetChanged()
+    class ListItemCallback : DiffUtil.ItemCallback<Note>() {
+        override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
+            return oldItem.title == newItem.title && oldItem.description == newItem.description
+                    && oldItem.priority == newItem.priority
+        }
     }
 
-    fun getNoteAt(position: Int): Note =
-         notes[position]
+    private var listener: OnItemClickListener? = null
 
+    fun getNoteAt(position: Int): Note =
+        getItem(position)
 
     //by default nested class is static , use inner to access data member of outer class
     inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -31,7 +38,7 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
             setOnClickListener {
                 val position = adapterPosition
                 if (listener != null && position != RecyclerView.NO_POSITION) {
-                    listener?.onItemClick(notes[position])
+                    listener?.onItemClick(getItem(position))
                 }
             }
         }
@@ -40,9 +47,8 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder =
         NoteViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.note_item, parent, false))
 
-    override fun getItemCount(): Int = notes.size
 
-    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) = holder.bind(notes[position])
+    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) = holder.bind(getItem(position))
     interface OnItemClickListener {
         fun onItemClick(note: Note)
     }
