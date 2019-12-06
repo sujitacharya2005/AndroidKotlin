@@ -16,6 +16,7 @@ import com.sa.kotlin.R
 class AddNoteActivity : AppCompatActivity() {
 
     companion object {
+        const val EXTRA_ID = "com.codinginflow.architectureexample.EXTRA_ID"
         const val EXTRA_TITLE = "com.codinginflow.architectureexample.EXTRA_TITLE"
         const val EXTRA_DESCRIPTION = "com.codinginflow.architectureexample.EXTRA_DESCRIPTION"
         const val EXTRA_PRIORITY = "com.codinginflow.architectureexample.EXTRA_PRIORITY"
@@ -34,7 +35,17 @@ class AddNoteActivity : AppCompatActivity() {
         numberPickerPriority?.minValue = 1
         numberPickerPriority?.maxValue = 10
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
-        title = "Add Note"
+
+        val intent = intent
+
+        if (intent.hasExtra(EXTRA_ID)) {
+            title = "Edit Note"
+            editTextTitle?.setText(intent.getStringExtra(EXTRA_TITLE))
+            editTextDescription?.setText(intent.getStringExtra(EXTRA_DESCRIPTION))
+            numberPickerPriority!!.value = intent.getIntExtra(EXTRA_PRIORITY, 1)
+        } else {
+            title = "Add Note"
+        }
     }
 
     private fun saveNote() {

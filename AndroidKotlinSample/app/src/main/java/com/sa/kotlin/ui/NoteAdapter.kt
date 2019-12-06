@@ -10,6 +10,8 @@ import kotlinx.android.synthetic.main.note_item.view.*
 
 
 class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
+    private var listener: OnItemClickListener? = null
+
     internal var notes: List<Note> = ArrayList()
     fun setNotes(notes1: List<Note>){
             notes = notes1
@@ -20,11 +22,18 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
          notes[position]
 
 
-    class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    //by default nested class is static , use inner to access data member of outer class
+    inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item : Note) = with(itemView) {
             text_view_title.text = item.title
             text_view_description.text = item.description
             text_view_priority.text = "${item.priority}"
+            setOnClickListener {
+                val position = adapterPosition
+                if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener?.onItemClick(notes[position])
+                }
+            }
         }
     }
 
@@ -34,5 +43,11 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
     override fun getItemCount(): Int = notes.size
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) = holder.bind(notes[position])
+    interface OnItemClickListener {
+        fun onItemClick(note: Note)
+    }
 
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
 }
