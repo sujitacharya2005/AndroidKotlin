@@ -9,7 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sa.kotlin.model.Note
 import com.sa.kotlin.ui.AddNoteActivity
@@ -49,7 +51,23 @@ class MainActivity : AppCompatActivity() {
                 Observer<List<Note>> { notes ->
                     noteAdapter.setNotes(notes)
                 })
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
 
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                noteViewModel.delete(noteAdapter.getNoteAt(viewHolder.adapterPosition))
+                Toast.makeText(this@MainActivity, "Note deleted", Toast.LENGTH_SHORT).show()
+            }
+        }).attachToRecyclerView(recycler_view)
 
 
     }
@@ -71,5 +89,8 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Note not saved", Toast.LENGTH_SHORT).show()
         }
     }
+
+
+
 }
 
