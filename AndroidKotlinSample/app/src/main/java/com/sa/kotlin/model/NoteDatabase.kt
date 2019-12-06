@@ -2,6 +2,7 @@ package com.sa.kotlin.model
 
 import android.content.Context
 import android.os.AsyncTask
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -23,7 +24,9 @@ abstract class NoteDatabase :  RoomDatabase() {
         fun getInstance(context:Context) : NoteDatabase =
             INSTANCE ?: synchronized(this) {
                 INSTANCE
-                    ?: buildDatabase(context).also { INSTANCE = it }
+                    ?: buildDatabase(context).also {
+                        Log.i("NoteTag",  "buildDatabase")
+                        INSTANCE = it }
             }
         private fun buildDatabase(context: Context): NoteDatabase =
             Room.databaseBuilder(context.applicationContext,
@@ -35,6 +38,7 @@ abstract class NoteDatabase :  RoomDatabase() {
         private val roomCallback: Callback = object : Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
+                Log.i("NoteTag",  "onCreate")
                 PopulateDbAsyncTask(INSTANCE!!).execute()
             }
         }
