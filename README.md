@@ -1,3 +1,9 @@
 # AndroidKotlin
 
-1. Retrofit
+## branch information
+
+### :master branch
+ Retrofit
+
+### :MVVM branch
+ mvvm architecture
