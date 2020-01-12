@@ -9,6 +9,7 @@ apply plugin: 'kotlin-kapt'
 ext {
     retrofit_version = '2.7.1'
     okhttpVersion = '4.3.0'
+    daggerVersion = '2.25.4'
 }
 
 android {
@@ -43,6 +44,9 @@ dependencies {
 
 
 
+    //dagger
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 
 
 
