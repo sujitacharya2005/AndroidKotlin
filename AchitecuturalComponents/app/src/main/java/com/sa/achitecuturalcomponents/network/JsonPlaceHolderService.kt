@@ -1,16 +1,13 @@
 package com.sa.achitecuturalcomponents.network
 
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+
 import retrofit2.http.GET
+import io.reactivex.Observable
 
 
 interface JsonPlaceHolderService {
    @GET("/albums")
-   fun getAlbums() : Call<List<Album>>
+   fun getAlbums() : Observable<List<Album>>
 
     companion object {
         const val BASE_URL = "https://jsonplaceholder.typicode.com"
