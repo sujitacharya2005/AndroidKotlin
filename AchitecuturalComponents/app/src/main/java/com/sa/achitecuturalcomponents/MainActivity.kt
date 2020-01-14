@@ -8,7 +8,9 @@ import com.sa.achitecuturalcomponents.network.Album
 import com.sa.achitecuturalcomponents.network.JsonPlaceHolderService
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import okhttp3.ResponseBody
 import java.io.IOException
@@ -39,12 +41,25 @@ class MainActivity : AppCompatActivity() {
 //            }
 //
 //        })
+        compositeDisposable.add(
+
         jsonPlaceHolderService.getAlbums()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe(getSubscriber());
+            .subscribeWith(object : DisposableObserver<List<Album>>(){
+                override fun onComplete() {
 
+                }
+
+                override fun onNext(ans: List<Album>) {
+                    Log.w("onNext", ans.toString())
+                }
+
+                override fun onError(e: Throwable) {}
+
+            }))
     }
+    private val compositeDisposable = CompositeDisposable()
     fun getSubscriber(): Observer<List<Album>> {
         return object : Observer<List<Album>> {
             fun onCompleted() {}
@@ -57,14 +72,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onComplete() {
+            override fun onComplete() {}
 
-            }
-
-            override fun onSubscribe(d: Disposable) {
-
-            }
+            override fun onSubscribe(d: Disposable) {}
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(!compositeDisposable.isDisposed)
+            compositeDisposable.dispose()
     }
 
 }
