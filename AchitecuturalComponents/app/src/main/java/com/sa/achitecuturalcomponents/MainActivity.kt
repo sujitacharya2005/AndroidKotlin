@@ -1,8 +1,15 @@
 package com.sa.achitecuturalcomponents
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.database.Cursor
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.sa.achitecuturalcomponents.di.DaggerNetComponent
 import com.sa.achitecuturalcomponents.network.Album
 import com.sa.achitecuturalcomponents.network.JsonPlaceHolderService
@@ -14,6 +21,7 @@ import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import okhttp3.ResponseBody
 import java.io.IOException
+import java.security.Permission
 import javax.inject.Inject
 
 
@@ -27,6 +35,34 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if(!checkPermission(this))
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_CONTACTS),1)
+        val projection = arrayOf(
+            ContactsContract.Data.CONTACT_ID,
+            ContactsContract.Data.DISPLAY_NAME,
+                        ContactsContract.Data.DATA1,
+                        ContactsContract.Data.DATA2,
+                        ContactsContract.Data.DATA3,
+                        ContactsContract.Data.MIMETYPE)
+
+
+        val c = contentResolver.query(ContactsContract.Data.CONTENT_URI, projection,
+            null, null,null);
+        if(c != null) {
+            while (c.moveToNext()) {
+                val id = c.getString(c.getColumnIndex(ContactsContract.Data.CONTACT_ID))
+                val name = c.getString(c.getColumnIndex(ContactsContract.Data.DISPLAY_NAME))
+                val data1 = c.getString(c.getColumnIndex(ContactsContract.Data.DATA1))
+                val data2 = c.getString(c.getColumnIndex(ContactsContract.Data.DATA2))
+                val data3 = c.getString(c.getColumnIndex(ContactsContract.Data.DATA3))
+                val mimeType = c.getString(c.getColumnIndex(ContactsContract.Data.MIMETYPE))
+                ContactsContract.CommonDataKinds.Relation.MIMETYPE
+
+                println(" id "+id+" name "+name+" data1 "+data1 +" data2 "+data2 +" data3 "+data3 + " mimeType "+mimeType)
+            }
+        }
+
         DaggerNetComponent.create().inject(this)
         //val jsonPlaceHolderService = JsonPlaceHolderService.create()
        // val jsonPlaceHolderService = DaggerNetComponent.create().getApi()
@@ -82,6 +118,11 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         if(!compositeDisposable.isDisposed)
             compositeDisposable.dispose()
+    }
+
+
+    fun checkPermission(context: Context) :  Boolean {
+        return ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
     }
 
 }
