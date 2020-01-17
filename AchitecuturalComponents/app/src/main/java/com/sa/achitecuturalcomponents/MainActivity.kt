@@ -2,11 +2,13 @@ package com.sa.achitecuturalcomponents
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -125,4 +127,8 @@ class MainActivity : AppCompatActivity() {
         return ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
     }
 
+    public fun clickMe(view: View) {
+        val intent = Intent(this, A::class.java)
+        startActivity(intent)
+    }
 }
