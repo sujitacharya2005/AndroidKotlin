@@ -13,4 +13,10 @@
             android:text="Launch A" android:id="@+id/button" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:onClick="clickMe"/>
+    <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp" tools:srcCompat="@tools:sample/avatars"
+            android:id="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="159dp" app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

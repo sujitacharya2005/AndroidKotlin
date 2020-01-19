@@ -12,15 +12,19 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.jakewharton.picasso.OkHttp3Downloader
 import com.sa.achitecuturalcomponents.di.DaggerNetComponent
 import com.sa.achitecuturalcomponents.network.Album
 import com.sa.achitecuturalcomponents.network.JsonPlaceHolderService
+import com.squareup.picasso.Picasso
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.ResponseBody
 import java.io.IOException
 import java.security.Permission
@@ -38,9 +42,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+      //  Glide.with(this).load("https://avatars3.githubusercontent.com/u/32689599?v=4").into(imageView);
+
+        val builder =  Picasso.Builder(this);
+        builder.downloader( OkHttp3Downloader(this));
+        builder.build().load("https://via.placeholder.com/150/771796")
+                .placeholder((R.drawable.ic_launcher_background))
+                .error(R.drawable.ic_launcher_background)
+                .into(imageView);
+
         if(!checkPermission(this))
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_CONTACTS),1)
-        val projection = arrayOf(
+        /*val projection = arrayOf(
             ContactsContract.Data.CONTACT_ID,
             ContactsContract.Data.DISPLAY_NAME,
                         ContactsContract.Data.DATA1,
@@ -63,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
                 println(" id "+id+" name "+name+" data1 "+data1 +" data2 "+data2 +" data3 "+data3 + " mimeType "+mimeType)
             }
-        }
+        }*/
 
         DaggerNetComponent.create().inject(this)
         //val jsonPlaceHolderService = JsonPlaceHolderService.create()
