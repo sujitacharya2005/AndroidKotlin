@@ -13,10 +13,20 @@
             android:text="Launch A" android:id="@+id/button" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:onClick="clickMe"/>
+
     <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp" tools:srcCompat="@tools:sample/avatars"
             android:id="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="159dp" app:layout_constraintEnd_toEndOf="parent"/>
+    <Button
+            android:text="LaunchCustomActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button3" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp" android:layout_marginEnd="118dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="launchCustomActivity"
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>

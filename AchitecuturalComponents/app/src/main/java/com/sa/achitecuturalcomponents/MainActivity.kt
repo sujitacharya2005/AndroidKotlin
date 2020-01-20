@@ -16,6 +16,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.jakewharton.picasso.OkHttp3Downloader
+import com.sa.achitecuturalcomponents.customview.CustomViewActivity
 import com.sa.achitecuturalcomponents.di.DaggerNetComponent
 import com.sa.achitecuturalcomponents.network.Album
 import com.sa.achitecuturalcomponents.network.JsonPlaceHolderService
@@ -176,8 +177,12 @@ class MainActivity : AppCompatActivity() {
         return ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
     }
 
-    public fun clickMe(view: View) {
+    fun clickMe(view: View) {
         val intent = Intent(this, A::class.java)
+        startActivity(intent)
+    }
+    fun launchCustomActivity(view :  View) {
+        val intent = Intent(this, CustomViewActivity::class.java)
         startActivity(intent)
     }
 
