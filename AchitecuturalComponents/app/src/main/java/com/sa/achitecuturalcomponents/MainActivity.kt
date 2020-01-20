@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.jakewharton.picasso.OkHttp3Downloader
 import com.sa.achitecuturalcomponents.customview.CustomViewActivity
 import com.sa.achitecuturalcomponents.di.DaggerNetComponent
+import com.sa.achitecuturalcomponents.mvp.LoginActivity
 import com.sa.achitecuturalcomponents.network.Album
 import com.sa.achitecuturalcomponents.network.JsonPlaceHolderService
 import com.squareup.picasso.Picasso
@@ -183,6 +184,11 @@ class MainActivity : AppCompatActivity() {
     }
     fun launchCustomActivity(view :  View) {
         val intent = Intent(this, CustomViewActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun launchLoginScreen(view : View) {
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 
