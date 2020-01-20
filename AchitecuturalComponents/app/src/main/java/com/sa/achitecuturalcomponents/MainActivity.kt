@@ -4,8 +4,10 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.database.Cursor
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.provider.ContactsContract
 import android.util.Log
 import android.view.View
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        Log.d(TAG,"*****onCreate")
 
       //  Glide.with(this).load("https://avatars3.githubusercontent.com/u/32689599?v=4").into(imageView);
 
@@ -111,6 +113,39 @@ class MainActivity : AppCompatActivity() {
 
             }))
     }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "*****onPause")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d(TAG, "*****onSaveInstanceState")
+    }
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "*****onRestart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "*****onResume")
+    }
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "*****onStart")
+    }
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "*****onStop")
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        Log.d(TAG, "*****onRestoreInstanceState")
+    }
+
     private val compositeDisposable = CompositeDisposable()
     fun getSubscriber(): Observer<List<Album>> {
         return object : Observer<List<Album>> {
@@ -144,5 +179,15 @@ class MainActivity : AppCompatActivity() {
     public fun clickMe(view: View) {
         val intent = Intent(this, A::class.java)
         startActivity(intent)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d(TAG, "*****onActivityResult")
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        Log.d(TAG, "*****onConfigurationChanged")
     }
 }
