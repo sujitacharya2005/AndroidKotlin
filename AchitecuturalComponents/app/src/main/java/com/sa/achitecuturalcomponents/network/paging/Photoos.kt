@@ -1,5 +1,9 @@
 package com.sa.achitecuturalcomponents.network.paging
 
-class Photoos {
-
-}
+data class Photoos (
+    val albumId:Int,
+    val id:Int,
+    val title:String,
+    val url:String,
+    val thumbnailUrl:String
+)

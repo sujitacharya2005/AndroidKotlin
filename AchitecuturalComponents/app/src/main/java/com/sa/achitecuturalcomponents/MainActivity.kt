@@ -21,6 +21,7 @@ import com.sa.achitecuturalcomponents.di.DaggerNetComponent
 import com.sa.achitecuturalcomponents.mvp.LoginActivity
 import com.sa.achitecuturalcomponents.network.Album
 import com.sa.achitecuturalcomponents.network.JsonPlaceHolderService
+import com.sa.achitecuturalcomponents.network.paging.AlbumActivity
 import com.squareup.picasso.Picasso
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -200,5 +201,10 @@ class MainActivity : AppCompatActivity() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         Log.d(TAG, "*****onConfigurationChanged")
+    }
+
+    fun launchPaging(v:View) {
+        val intent = Intent(this, AlbumActivity::class.java)
+        startActivity(intent)
     }
 }

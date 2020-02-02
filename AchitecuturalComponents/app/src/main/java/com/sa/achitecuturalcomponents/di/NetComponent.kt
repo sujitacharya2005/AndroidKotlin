@@ -1,7 +1,7 @@
 package com.sa.achitecuturalcomponents.di
 
 import com.sa.achitecuturalcomponents.MainActivity
-import com.sa.achitecuturalcomponents.network.JsonPlaceHolderService
+import com.sa.achitecuturalcomponents.network.paging.AlbumPageKeyedDataSource
 import dagger.Component
 import javax.inject.Singleton
 
@@ -10,4 +10,5 @@ import javax.inject.Singleton
 interface NetComponent {
    // fun getApi() :  JsonPlaceHolderService
     fun inject(act:MainActivity)
+    fun inject(act:AlbumPageKeyedDataSource)
 }

@@ -16,6 +16,7 @@ ext {
     glide_version = '4.11.0'
     mockito_version = '3.2.0'
     paging_version = '2.1.1'
+    lifecycle_version = '2.1.0'
 }
 
 android {
@@ -42,6 +43,10 @@ android {
 }
 
 dependencies {
+    //life cycle and view model
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
@@ -55,7 +60,7 @@ dependencies {
 
 
     //mockito
-    implementation  "org.mockito:mockito-core:$mockito_version"
+    implementation "org.mockito:mockito-core:$mockito_version"
     testImplementation 'org.mockito:mockito-inline:2.13.0'
 
 
