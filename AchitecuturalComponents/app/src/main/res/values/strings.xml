@@ -3,4 +3,6 @@
     <string name="enter_user_name">Enter user name</string>
     <string name="enter_password">Enter password</string>
     <string name="login">Login</string>
+    <string name="password_error">password error</string>
+    <string name="username_error">username error</string>
 </resources>
