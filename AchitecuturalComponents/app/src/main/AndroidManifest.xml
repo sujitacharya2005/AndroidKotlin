@@ -12,6 +12,17 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".service.NormalServiceActivity">
+        </activity>
+
+        <service
+                android:name=".service.NormalService"
+                android:enabled="true"
+                android:exported="true">
+        </service>
+
+        <activity android:name=".service.ServiceActivity">
+        </activity>
         <activity android:name=".network.paging.AlbumActivity">
         </activity>
         <activity android:name=".mvp.LoginActivity">

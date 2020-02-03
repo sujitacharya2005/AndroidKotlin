@@ -22,6 +22,7 @@ import com.sa.achitecuturalcomponents.mvp.LoginActivity
 import com.sa.achitecuturalcomponents.network.Album
 import com.sa.achitecuturalcomponents.network.JsonPlaceHolderService
 import com.sa.achitecuturalcomponents.network.paging.AlbumActivity
+import com.sa.achitecuturalcomponents.service.ServiceActivity
 import com.squareup.picasso.Picasso
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -206,5 +207,8 @@ class MainActivity : AppCompatActivity() {
     fun launchPaging(v:View) {
         val intent = Intent(this, AlbumActivity::class.java)
         startActivity(intent)
+    }
+    fun serviceStart(v:View) {
+        startActivity(Intent(v.context, ServiceActivity::class.java))
     }
 }
