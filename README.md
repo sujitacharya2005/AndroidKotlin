@@ -1,3 +1,16 @@
 # AndroidKotlin
 
-1. Retrofit
+## branch information
+
+### :master branch
+ Retrofit
+
+### :MVVM branch
+ mvvm architecture
+ 
+ ### : ArchitecturalComponents branch
+ Retrofit, Room, 
+ Launch Mode
+ ContentResolver
+ RxJava
+ Dagger
