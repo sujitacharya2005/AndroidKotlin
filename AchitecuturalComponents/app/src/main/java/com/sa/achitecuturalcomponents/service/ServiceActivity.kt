@@ -15,4 +15,7 @@ class ServiceActivity : AppCompatActivity() {
     fun startNormalService(v:View) {
         startActivity(Intent(v.context, NormalServiceActivity::class.java))
     }
+    fun startForegroundService(v:View) {
+        startActivity(Intent(v.context, ForegroundServiceActivity::class.java))
+    }
 }
