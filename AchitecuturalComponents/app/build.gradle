@@ -77,6 +77,9 @@ dependencies {
     //paging
     implementation "androidx.paging:paging-runtime:$paging_version"
 
+    //cardView
+    implementation 'androidx.cardview:cardview:1.0.0'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -87,6 +90,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //ActivityTestRule
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    implementation 'androidx.test:rules:1.2.0'
+
+
 
 }
