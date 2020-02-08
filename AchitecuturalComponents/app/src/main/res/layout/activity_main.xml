@@ -40,6 +40,12 @@
             android:layout_height="wrap_content"
             android:onClick="serviceStart"
             android:id="@+id/button6" />
+    <Button
+            android:text="FragmentBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="fragmentBackButton"
+            android:id="@+id/button7" />
 
     <ImageView
             android:layout_width="50dp"

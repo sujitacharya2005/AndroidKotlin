@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.jakewharton.picasso.OkHttp3Downloader
 import com.sa.achitecuturalcomponents.customview.CustomViewActivity
 import com.sa.achitecuturalcomponents.di.DaggerNetComponent
+import com.sa.achitecuturalcomponents.fragmentbackbutton.MainFragmentActivity
 import com.sa.achitecuturalcomponents.mvp.LoginActivity
 import com.sa.achitecuturalcomponents.network.Album
 import com.sa.achitecuturalcomponents.network.JsonPlaceHolderService
@@ -210,5 +211,8 @@ class MainActivity : AppCompatActivity() {
     }
     fun serviceStart(v:View) {
         startActivity(Intent(v.context, ServiceActivity::class.java))
+    }
+    fun fragmentBackButton(v:View) {
+        startActivity(Intent(this, MainFragmentActivity::class.java))
     }
 }

@@ -45,6 +45,7 @@ android {
 dependencies {
     //life cycle and view model
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     //Retrofit
@@ -91,7 +92,6 @@ dependencies {
 
     //ActivityTestRule
     implementation 'androidx.test:rules:1.2.0'
-
 
 
 }
