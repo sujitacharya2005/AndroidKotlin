@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.jakewharton.picasso.OkHttp3Downloader
 import com.sa.achitecuturalcomponents.customview.CustomViewActivity
 import com.sa.achitecuturalcomponents.di.DaggerNetComponent
+import com.sa.achitecuturalcomponents.dialog.MainDialogActivity
 import com.sa.achitecuturalcomponents.fragmentbackbutton.MainFragmentActivity
 import com.sa.achitecuturalcomponents.mvp.LoginActivity
 import com.sa.achitecuturalcomponents.network.Album
@@ -214,5 +215,8 @@ class MainActivity : AppCompatActivity() {
     }
     fun fragmentBackButton(v:View) {
         startActivity(Intent(this, MainFragmentActivity::class.java))
+    }
+    fun alertDialog(v:View) {
+        startActivity(Intent(this, MainDialogActivity::class.java))
     }
 }
